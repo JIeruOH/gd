@@ -6,8 +6,6 @@
 #include <linalg.h>
 #include <vector>
 
-#include <iostream>
-
 
 using namespace linalg::aliases;
 
@@ -69,9 +67,6 @@ namespace cg
 	inline T& resource<T>::item(size_t x, size_t y)
 	{
 		// TODO Lab: 1.02 Implement `cg::resource` class
-		std::cout << data.size() << ' ' << stride << std::endl;
-		std::cout << "data.size" << std::endl;
-		std::cout << y * stride + x << std::endl;
 		return data.at(y * stride + x);
 	}
 	template<typename T>

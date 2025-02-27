@@ -150,25 +150,16 @@ namespace cg::renderer
 						float u = static_cast<float>(edge1) / edge;
 						float v = static_cast<float>(edge2) / edge;
 						float w = static_cast<float>(edge0) / edge;
-						std::cout << "asdf4" << std::endl;
 
 						float depth = u * vertices[0].position.z +
 									  v * vertices[1].position.z +
 									  w * vertices[2].position.z;
-						std::cout << "asdf5" << std::endl;
 						if (depth_test(depth, x, y)) {
-							std::cout << "asdf6" << std::endl;
 							auto pixel_result = pixel_shader(vertices[0], depth);
-							std::cout << "asdf7" << std::endl;
 							render_target->item(x, y) = RT::from_color(pixel_result);
-							std::cout << "asdf8" << std::endl;
-							std::cout << x << ' ' << y << std::endl;
 							depth_buffer->item(0,0);
-							std::cout << "asd11" << std::endl;
 							depth_buffer->item(x, y) = depth;
-							std::cout << "asdf9" << std::endl;
 						}
-						std::cout << "asdf10" << std::endl;
 					}
 				}
 			}
