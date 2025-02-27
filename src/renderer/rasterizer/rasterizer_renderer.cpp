@@ -70,7 +70,7 @@ void cg::renderer::rasterization_renderer::render()
 	rasterizer->clear_render_target({255, 255, 255});
 	auto stop = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float, std::milli> duration = stop - start;
-	std::cout << "Clearing... " << duration.count() << "ms" << std::endl;
+	std::cout << "Clearinggg... " << duration.count() << "ms\n";
 	std::cout << "testim";
 
 	for (size_t shape_id = 0; shape_id < model->get_index_buffers().size(); shape_id++) {
