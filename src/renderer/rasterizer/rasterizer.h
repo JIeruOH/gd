@@ -116,7 +116,6 @@ namespace cg::renderer
 			vertices[0] = vertex_buffer->item(index_buffer->item(vertex_id++));
 			vertices[1] = vertex_buffer->item(index_buffer->item(vertex_id++));
 			vertices[2] = vertex_buffer->item(index_buffer->item(vertex_id++));
-			std::cout << "asdf1" << std::endl;
 
 			for (auto& vertex: vertices) {
 				float4 coords(vertex.position.x, vertex.position.y, vertex.position.z, 1.f);
@@ -127,7 +126,6 @@ namespace cg::renderer
 				vertex.position.x = (vertex.position.x + 1.f) * width / 2.f;
 				vertex.position.y = (-vertex.position.y + 1.f) * height / 2.f;
 			}
-			std::cout << "asdf2" << std::endl;
 			int2 vertex_a = int2(vertices[0].position.xy());
 			int2 vertex_b = int2(vertices[1].position.xy());
 			int2 vertex_c = int2(vertices[2].position.xy());
@@ -135,34 +133,38 @@ namespace cg::renderer
 			int2 min_vertex = min(vertex_a, min(vertex_b, vertex_c));
 			int2 max_vertex = max(vertex_a, max(vertex_b, vertex_c));
 			int2 min_viewport = int2{0, 0};
-			std::cout << "asdf3" << std::endl;
 			int2 max_viewport = int2{static_cast<int>(width - 1), static_cast<int>(height - 1)};
 
 			int2 begin = clamp(min_vertex, min_viewport, max_viewport);
 			int2 end = clamp(max_vertex, min_viewport, max_viewport);
 
 			float edge = static_cast<float>(edge_function(vertex_a, vertex_b, vertex_c));
-			std::cout << "asdf4" << std::endl;
 
 			for (int x = begin.x; x <= end.x; x++) {
 				for (int y = begin.y; y < end.y; y++) {
 					int2 point{static_cast<int>(x), static_cast<int>(y)};
+					std::cout << "asdf1" << std::endl;
 					int edge0 = edge_function(vertex_a, vertex_b, point);
 					int edge1 = edge_function(vertex_b, vertex_c, point);
 					int edge2 = edge_function(vertex_c, vertex_a, point);
+					std::cout << "asdf2" << std::endl;
 					if (edge0 >= 0 && edge1 >= 0 && edge2 >= 0) {
+						std::cout << "asdf3" << std::endl;
 						float u = static_cast<float>(edge1) / edge;
 						float v = static_cast<float>(edge2) / edge;
 						float w = static_cast<float>(edge0) / edge;
+						std::cout << "asdf4" << std::endl;
 
 						float depth = u * vertices[0].position.z +
 									  v * vertices[1].position.z +
 									  w * vertices[2].position.z;
+						std::cout << "asdf5" << std::endl;
 						if (depth_test(depth, x, y)) {
 							auto pixel_result = pixel_shader(vertices[0], 0.f);
 							render_target->item(x, y) = RT::from_color(pixel_result);
 							depth_buffer->item(x, y) = depth;
 						}
+						std::cout << "asdf6" << std::endl;
 					}
 				}
 			}
