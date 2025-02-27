@@ -71,6 +71,7 @@ void cg::renderer::rasterization_renderer::render()
 	auto stop = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float, std::milli> duration = stop - start;
 	std::cout << "Clearing... " << duration.count() << "ms" << std::endl;
+	std::cout << "testim";
 
 	for (size_t shape_id = 0; shape_id < model->get_index_buffers().size(); shape_id++) {
 		rasterizer->set_vertex_buffer(model->get_vertex_buffers()[shape_id]);
