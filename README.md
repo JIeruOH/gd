@@ -20,8 +20,8 @@ Use `git clone --recursive` to clone the repo with submodules or run `git submod
 Go to the project folder and run the next command:
 
 ```sh
-mkdir Build
-cd Build
+mkdir build
+cd build
 cmake ..
 ```
 
@@ -35,3 +35,15 @@ cmake ..
 - [Cube model](https://casual-effects.com/g3d/data10/index.html#) by Morgan McGuire (CC BY 3.0 License)
 - [Teapot model](https://casual-effects.com/g3d/data10/common/model/teapot/teapot.zip) by Martin Newell (CC0 License)
 - [Dabrovic Sponza model](https://casual-effects.com/g3d/data10/index.html#) by Marko Dabrovic (CC BY-NC License)
+
+
+## Performance data
+
+### Clearing
+
+| Num of Pixels | Clear time |
+| 1000          | 0.34 ms    |
+| 10000         | 2.19 ms    |
+| 100000        | 24.19 ms   |
+| 1000000       | 179.09 ms  |
+| FullHD        | 43.12 ms  |
