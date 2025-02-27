@@ -78,6 +78,7 @@ void cg::renderer::rasterization_renderer::render()
 
 		rasterizer->draw(model->get_index_buffers()[shape_id]->count(), 0);
 	}
+	std::cout << "asdf";
 
 	cg::utils::save_resource(*render_target, settings->result_path);
 }
