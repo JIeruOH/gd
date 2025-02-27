@@ -30,7 +30,7 @@ void cg::renderer::rasterization_renderer::init()
 		std::cout << "Vertex buffer size: " << vertex_buffer_size << "\n";
 		std::cout << "Index buffer size: " << index_buffer_size << "\n";
 		std::cout << "Pure size " << pure_vertex_buffer_size << "\n";
-		std::cout << "Saving: " << pure_vertex_buffer_size - vertex_buffer_size - index_buffer_size << "\n";
+		std::cout << "Saving: " << pure_vertex_buffer_size - vertex_buffer_size - index_buffer_size << std::endl;
 	}
 
 	camera = std::make_shared<cg::world::camera>();
@@ -70,8 +70,7 @@ void cg::renderer::rasterization_renderer::render()
 	rasterizer->clear_render_target({255, 255, 255});
 	auto stop = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float, std::milli> duration = stop - start;
-	std::cout << "Clearinggg... " << duration.count() << "ms\n";
-	std::cout << "testim";
+	std::cout << "Clearing... " << duration.count() << "ms" << std::endl;
 
 	for (size_t shape_id = 0; shape_id < model->get_index_buffers().size(); shape_id++) {
 		rasterizer->set_vertex_buffer(model->get_vertex_buffers()[shape_id]);
@@ -79,9 +78,10 @@ void cg::renderer::rasterization_renderer::render()
 
 		rasterizer->draw(model->get_index_buffers()[shape_id]->count(), 0);
 	}
-	std::cout << "asdf";
+	std::cout << "asdf1" << std::endl;
 
 	cg::utils::save_resource(*render_target, settings->result_path);
+	std::cout << "asdf2" << std::endl;
 }
 
 void cg::renderer::rasterization_renderer::destroy() {}
