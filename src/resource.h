@@ -6,6 +6,8 @@
 #include <linalg.h>
 #include <vector>
 
+#include <iostream>
+
 
 using namespace linalg::aliases;
 
@@ -67,6 +69,8 @@ namespace cg
 	inline T& resource<T>::item(size_t x, size_t y)
 	{
 		// TODO Lab: 1.02 Implement `cg::resource` class
+		std::cout << data.size() << std::endl;
+		std::cout << "data.size" << std::endl;
 		return data.at(y * stride + x);
 	}
 	template<typename T>
@@ -131,10 +135,11 @@ namespace cg
 		{
 			// TODO Lab: 1.02 Implement `cg::color` and `cg::unsigned_color` structs
 			return float3{
-					static_cast<float>(r),
-					static_cast<float>(g),
-					static_cast<float>(b),
-			} / 255.f;
+						   static_cast<float>(r),
+						   static_cast<float>(g),
+						   static_cast<float>(b),
+				   } /
+				   255.f;
 		};
 		uint8_t r;
 		uint8_t g;
