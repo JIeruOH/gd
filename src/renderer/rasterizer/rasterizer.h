@@ -143,13 +143,10 @@ namespace cg::renderer
 			for (int x = begin.x; x <= end.x; x++) {
 				for (int y = begin.y; y < end.y; y++) {
 					int2 point{static_cast<int>(x), static_cast<int>(y)};
-					std::cout << "asdf1" << std::endl;
 					int edge0 = edge_function(vertex_a, vertex_b, point);
 					int edge1 = edge_function(vertex_b, vertex_c, point);
 					int edge2 = edge_function(vertex_c, vertex_a, point);
-					std::cout << "asdf2" << std::endl;
 					if (edge0 >= 0 && edge1 >= 0 && edge2 >= 0) {
-						std::cout << "asdf3" << std::endl;
 						float u = static_cast<float>(edge1) / edge;
 						float v = static_cast<float>(edge2) / edge;
 						float w = static_cast<float>(edge0) / edge;
@@ -160,8 +157,11 @@ namespace cg::renderer
 									  w * vertices[2].position.z;
 						std::cout << "asdf5" << std::endl;
 						if (depth_test(depth, x, y)) {
+							std::cout << "asdf6" << std::endl;
 							auto pixel_result = pixel_shader(vertices[0], 0.f);
+							std::cout << "asdf7" << std::endl;
 							render_target->item(x, y) = RT::from_color(pixel_result);
+							std::cout << "asdf8" << std::endl;
 							depth_buffer->item(x, y) = depth;
 						}
 						std::cout << "asdf6" << std::endl;
