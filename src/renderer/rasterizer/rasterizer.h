@@ -133,7 +133,7 @@ namespace cg::renderer
 			int2 min_vertex = min(vertex_a, min(vertex_b, vertex_c));
 			int2 max_vertex = max(vertex_a, max(vertex_b, vertex_c));
 			int2 min_viewport = int2{0, 0};
-			int2 max_viewport = int2{width - 1, height - 1};
+			int2 max_viewport = int2{static_cast<int>(width - 1), static_cast<int>(height - 1)};
 
 			int2 begin = clamp(min_vertex, min_viewport, max_viewport);
 			int2 end = clamp(max_vertex, min_viewport, max_viewport);
@@ -142,7 +142,7 @@ namespace cg::renderer
 
 			for (int x = begin.x; x <= end.x; x++) {
 				for (int y = begin.y; y < end.y; y++) {
-					int2 point{x, y};
+					int2 point{static_cast<int>(x), static_cast<int>(y)};
 					int edge0 = edge_function(vertex_a, vertex_b, point);
 					int edge1 = edge_function(vertex_b, vertex_c, point);
 					int edge2 = edge_function(vertex_c, vertex_a, point);
