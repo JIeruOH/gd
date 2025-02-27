@@ -158,13 +158,15 @@ namespace cg::renderer
 						std::cout << "asdf5" << std::endl;
 						if (depth_test(depth, x, y)) {
 							std::cout << "asdf6" << std::endl;
-							auto pixel_result = pixel_shader(vertices[0], 0.f);
+							auto pixel_result = pixel_shader(vertices[0], depth);
 							std::cout << "asdf7" << std::endl;
 							render_target->item(x, y) = RT::from_color(pixel_result);
 							std::cout << "asdf8" << std::endl;
+							std::cout << x << ' ' << y << std::endl;
 							depth_buffer->item(x, y) = depth;
+							std::cout << "asdf9" << std::endl;
 						}
-						std::cout << "asdf6" << std::endl;
+						std::cout << "asdf10" << std::endl;
 					}
 				}
 			}
