@@ -116,6 +116,7 @@ namespace cg::renderer
 			vertices[0] = vertex_buffer->item(index_buffer->item(vertex_id++));
 			vertices[1] = vertex_buffer->item(index_buffer->item(vertex_id++));
 			vertices[2] = vertex_buffer->item(index_buffer->item(vertex_id++));
+			std::cout << "asdf1" << std::endl;
 
 			for (auto& vertex: vertices) {
 				float4 coords(vertex.position.x, vertex.position.y, vertex.position.z, 1.f);
@@ -126,6 +127,7 @@ namespace cg::renderer
 				vertex.position.x = (vertex.position.x + 1.f) * width / 2.f;
 				vertex.position.y = (-vertex.position.y + 1.f) * height / 2.f;
 			}
+			std::cout << "asdf2" << std::endl;
 			int2 vertex_a = int2(vertices[0].position.xy());
 			int2 vertex_b = int2(vertices[1].position.xy());
 			int2 vertex_c = int2(vertices[2].position.xy());
@@ -133,12 +135,14 @@ namespace cg::renderer
 			int2 min_vertex = min(vertex_a, min(vertex_b, vertex_c));
 			int2 max_vertex = max(vertex_a, max(vertex_b, vertex_c));
 			int2 min_viewport = int2{0, 0};
+			std::cout << "asdf3" << std::endl;
 			int2 max_viewport = int2{static_cast<int>(width - 1), static_cast<int>(height - 1)};
 
 			int2 begin = clamp(min_vertex, min_viewport, max_viewport);
 			int2 end = clamp(max_vertex, min_viewport, max_viewport);
 
 			float edge = static_cast<float>(edge_function(vertex_a, vertex_b, vertex_c));
+			std::cout << "asdf4" << std::endl;
 
 			for (int x = begin.x; x <= end.x; x++) {
 				for (int y = begin.y; y < end.y; y++) {
