@@ -163,6 +163,8 @@ namespace cg::renderer
 							render_target->item(x, y) = RT::from_color(pixel_result);
 							std::cout << "asdf8" << std::endl;
 							std::cout << x << ' ' << y << std::endl;
+							depth_buffer->item(0,0);
+							std::cout << "asd11" << std::endl;
 							depth_buffer->item(x, y) = depth;
 							std::cout << "asdf9" << std::endl;
 						}
