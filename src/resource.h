@@ -72,7 +72,6 @@ namespace cg
 		std::cout << data.size() << ' ' << stride << std::endl;
 		std::cout << "data.size" << std::endl;
 		std::cout << y * stride + x << std::endl;
-		std::cout << data.at(y * stride + x)<<std::endl;
 		return data.at(y * stride + x);
 	}
 	template<typename T>
