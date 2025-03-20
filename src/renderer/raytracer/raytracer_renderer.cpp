@@ -36,7 +36,10 @@ void cg::renderer::ray_tracing_renderer::init()
 	raytracer->set_vertex_buffers(model->get_vertex_buffers());
 	raytracer->set_index_buffers(model->get_index_buffers());
 
-	lights.push_back({float3{0.f, 1.58f, -0.03f}, float3{0.78f, 0.78f, 0.78f}});
+	lights.push_back({
+			float3{0.f, 1.58f, -0.03f},
+			float3{0.78f, 0.78f, 0.78f}
+	});
 
 	shadow_raytracer = std::make_shared<cg::renderer::raytracer<cg::vertex, cg::unsigned_color>>();
 	shadow_raytracer->set_vertex_buffers(model->get_vertex_buffers());
@@ -64,24 +67,24 @@ void cg::renderer::ray_tracing_renderer::render()
 		payload.color = {0.f, 0.f, 0.f};
 		return payload;
 	};
+
 	std::random_device random_device;
 	std::mt19937 random_generator(random_device());
 	std::uniform_real_distribution<float> uniform_distribution(-1.f, +1.f);
+
 	raytracer->closest_hit_shader = [&](const ray& ray, payload& payload, const triangle<cg::vertex>& triangle, size_t depth) {
 		float3 position = ray.position + ray.direction * payload.t;
 		float3 normal = normalize(
 				payload.bary.x * triangle.na +
 				payload.bary.y * triangle.nb +
-				payload.bary.z * triangle.nc
-		);
+				payload.bary.z * triangle.nc);
 
 		float3 result_color = triangle.emissive;
 
 		float3 random_direction{
 				uniform_distribution(random_generator),
 				uniform_distribution(random_generator),
-				uniform_distribution(random_generator)
-		};
+				uniform_distribution(random_generator)};
 		if (dot(normal, random_direction) < 0.f)
 			random_direction = -random_direction;
 
@@ -111,8 +114,7 @@ void cg::renderer::ray_tracing_renderer::render()
 	auto start = std::chrono::high_resolution_clock::now();
 	raytracer->ray_generation(
 			camera->get_position(), camera->get_direction(), camera->get_right(),
-			camera->get_up(), settings->raytracing_depth, settings->accumulation_num
-	);
+			camera->get_up(), settings->raytracing_depth, settings->accumulation_num);
 
 	auto stop = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float, std::milli> duration = stop - start;
